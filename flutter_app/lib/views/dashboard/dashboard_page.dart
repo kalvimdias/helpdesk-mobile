@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../../widgets/dashboard_card.dart';
 
-class DashboardPage extends StatelessWidget {
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../viewmodels/dashboard_provider.dart';
+
+class DashboardPage extends ConsumerWidget {
   const DashboardPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final viewModel = ref.watch(dashboardProvider);
     return Scaffold(
       appBar: AppBar(title: const Text('Dashboard')),
       body: Padding(
@@ -15,7 +19,7 @@ class DashboardPage extends StatelessWidget {
           children: [
             DashboardCard(
               titulo: 'Novos Chamados',
-              quantidade: 12,
+              quantidade: viewModel.novos,
               onTap: () {},
             ),
 
@@ -23,7 +27,7 @@ class DashboardPage extends StatelessWidget {
 
             DashboardCard(
               titulo: 'Em Atendimento',
-              quantidade: 8,
+              quantidade: viewModel.emAtendimento,
               onTap: () {},
             ),
 
@@ -31,13 +35,17 @@ class DashboardPage extends StatelessWidget {
 
             DashboardCard(
               titulo: 'Aguardando Cliente',
-              quantidade: 5,
+              quantidade: viewModel.aguardandoCliente,
               onTap: () {},
             ),
 
             const SizedBox(height: 12),
 
-            DashboardCard(titulo: 'Finalizados', quantidade: 31, onTap: () {}),
+            DashboardCard(
+              titulo: 'Finalizados',
+              quantidade: viewModel.finalizados,
+              onTap: () {},
+            ),
           ],
         ),
       ),
