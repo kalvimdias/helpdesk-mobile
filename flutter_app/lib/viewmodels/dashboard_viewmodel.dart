@@ -48,4 +48,8 @@ class DashboardViewModel {
 
   int get finalizados =>
       chamados.where((c) => c.status == StatusChamado.finalizado).length;
+
+  List<Chamado> obterPorStatus(StatusChamado status) {
+    return chamados.where((c) => c.status == status).toList();
+  }
 }

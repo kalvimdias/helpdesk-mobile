@@ -5,6 +5,8 @@ import '../../widgets/dashboard_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../viewmodels/dashboard_provider.dart';
 
+import 'package:go_router/go_router.dart';
+
 class DashboardPage extends ConsumerWidget {
   const DashboardPage({super.key});
 
@@ -20,7 +22,9 @@ class DashboardPage extends ConsumerWidget {
             DashboardCard(
               titulo: 'Novos Chamados',
               quantidade: viewModel.novos,
-              onTap: () {},
+              onTap: () {
+                context.go('/chamados/novo');
+              },
             ),
 
             const SizedBox(height: 12),
@@ -28,7 +32,9 @@ class DashboardPage extends ConsumerWidget {
             DashboardCard(
               titulo: 'Em Atendimento',
               quantidade: viewModel.emAtendimento,
-              onTap: () {},
+              onTap: () {
+                context.go('/chamados/emAtendimento');
+              },
             ),
 
             const SizedBox(height: 12),
@@ -36,7 +42,9 @@ class DashboardPage extends ConsumerWidget {
             DashboardCard(
               titulo: 'Aguardando Cliente',
               quantidade: viewModel.aguardandoCliente,
-              onTap: () {},
+              onTap: () {
+                context.go('/chamados/aguardandoCliente');
+              },
             ),
 
             const SizedBox(height: 12),
@@ -44,7 +52,9 @@ class DashboardPage extends ConsumerWidget {
             DashboardCard(
               titulo: 'Finalizados',
               quantidade: viewModel.finalizados,
-              onTap: () {},
+              onTap: () {
+                context.go('/chamados/finalizado');
+              },
             ),
           ],
         ),
