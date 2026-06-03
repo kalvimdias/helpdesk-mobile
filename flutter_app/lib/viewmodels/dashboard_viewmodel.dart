@@ -6,6 +6,9 @@ class DashboardViewModel {
       id: 1,
       titulo: 'Computador não liga',
       descricao: 'Cliente informou que o computador não inicia.',
+      cliente: 'Empresa Alpha',
+      tecnicoResponsavel: 'Kalvim Dias',
+      dataAbertura: DateTime(2026, 6, 1),
       status: StatusChamado.novo,
     ),
 
@@ -13,6 +16,10 @@ class DashboardViewModel {
       id: 2,
       titulo: 'Impressora Epson',
       descricao: 'Falha de comunicação USB.',
+
+      cliente: 'Empresa Alpha',
+      tecnicoResponsavel: 'Kalvim Dias',
+      dataAbertura: DateTime(2026, 6, 1),
       status: StatusChamado.emAtendimento,
     ),
 
@@ -20,6 +27,9 @@ class DashboardViewModel {
       id: 3,
       titulo: 'Internet instável',
       descricao: 'Cliente deve testar por mais 24h.',
+      cliente: 'Empresa Alpha',
+      tecnicoResponsavel: 'Kalvim Dias',
+      dataAbertura: DateTime(2026, 6, 1),
       status: StatusChamado.aguardandoCliente,
     ),
 
@@ -27,6 +37,9 @@ class DashboardViewModel {
       id: 4,
       titulo: 'Troca de SSD',
       descricao: 'Serviço concluído.',
+      cliente: 'Empresa Alpha',
+      tecnicoResponsavel: 'Kalvim Dias',
+      dataAbertura: DateTime(2026, 6, 1),
       status: StatusChamado.finalizado,
     ),
 
@@ -34,6 +47,9 @@ class DashboardViewModel {
       id: 5,
       titulo: 'Configuração de rede',
       descricao: 'Aguardando técnico assumir.',
+      cliente: 'Empresa Alpha',
+      tecnicoResponsavel: 'Kalvim Dias',
+      dataAbertura: DateTime(2026, 6, 1),
       status: StatusChamado.novo,
     ),
   ];
@@ -51,5 +67,13 @@ class DashboardViewModel {
 
   List<Chamado> obterPorStatus(StatusChamado status) {
     return chamados.where((c) => c.status == status).toList();
+  }
+
+  Chamado? obterPorId(int id) {
+    try {
+      return chamados.firstWhere((c) => c.id == id);
+    } catch (_) {
+      return null;
+    }
   }
 }

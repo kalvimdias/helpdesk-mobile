@@ -4,12 +4,14 @@ class DashboardCard extends StatelessWidget {
   final String titulo;
   final int quantidade;
   final VoidCallback onTap;
+  final IconData icone;
 
   const DashboardCard({
     super.key,
     required this.titulo,
     required this.quantidade,
     required this.onTap,
+    required this.icone,
   });
 
   @override
@@ -25,6 +27,7 @@ class DashboardCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Icon(icone, size: 32),
               Text(
                 titulo,
                 style: const TextStyle(

@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/chamado.dart';
 import '../../viewmodels/dashboard_provider.dart';
 
+import 'package:go_router/go_router.dart';
+
 class ChamadosPage extends ConsumerWidget {
   final StatusChamado status;
 
@@ -24,8 +26,11 @@ class ChamadosPage extends ConsumerWidget {
 
           return ListTile(
             title: Text(chamado.titulo),
-            subtitle: Text(chamado.descricao),
+            subtitle: Text(chamado.cliente),
             leading: CircleAvatar(child: Text(chamado.id.toString())),
+            onTap: () {
+              context.push('/chamado/${chamado.id}');
+            },
           );
         },
       ),

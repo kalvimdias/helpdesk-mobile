@@ -22,8 +22,9 @@ class DashboardPage extends ConsumerWidget {
             DashboardCard(
               titulo: 'Novos Chamados',
               quantidade: viewModel.novos,
+              icone: Icons.fiber_new,
               onTap: () {
-                context.go('/chamados/novo');
+                context.push('/chamados/novo');
               },
             ),
 
@@ -32,8 +33,9 @@ class DashboardPage extends ConsumerWidget {
             DashboardCard(
               titulo: 'Em Atendimento',
               quantidade: viewModel.emAtendimento,
+              icone: Icons.fiber_new,
               onTap: () {
-                context.go('/chamados/emAtendimento');
+                context.push('/chamados/emAtendimento');
               },
             ),
 
@@ -42,8 +44,9 @@ class DashboardPage extends ConsumerWidget {
             DashboardCard(
               titulo: 'Aguardando Cliente',
               quantidade: viewModel.aguardandoCliente,
+              icone: Icons.fiber_new,
               onTap: () {
-                context.go('/chamados/aguardandoCliente');
+                context.push('/chamados/aguardandoCliente');
               },
             ),
 
@@ -52,8 +55,9 @@ class DashboardPage extends ConsumerWidget {
             DashboardCard(
               titulo: 'Finalizados',
               quantidade: viewModel.finalizados,
+              icone: Icons.fiber_new,
               onTap: () {
-                context.go('/chamados/finalizado');
+                context.push('/chamados/finalizado');
               },
             ),
           ],
