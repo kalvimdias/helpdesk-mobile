@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import '../../widgets/dashboard_card.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../viewmodels/dashboard_provider.dart';
+
+import '../../viewmodels/chamados_provider.dart';
 
 import 'package:go_router/go_router.dart';
 
@@ -12,9 +13,16 @@ class DashboardPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(dashboardProvider);
+    ref.watch(chamadosProvider);
+    final viewModel = ref.read(chamadosProvider.notifier);
     return Scaffold(
       appBar: AppBar(title: const Text('Dashboard')),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.push('/novo-chamado');
+        },
+        child: const Icon(Icons.add),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(

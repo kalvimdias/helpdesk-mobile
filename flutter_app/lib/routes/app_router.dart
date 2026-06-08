@@ -6,6 +6,7 @@ import '../models/chamado.dart';
 import '../views/chamados/chamados_page.dart';
 
 import '../views/chamados/chamado_detalhe_page.dart';
+import '../views/chamados/novo_chamado_page.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/login',
@@ -49,6 +50,14 @@ final appRouter = GoRouter(
 
         return ChamadoDetalhePage(chamadoId: id);
       },
+    ),
+    GoRoute(
+      path: '/novo-chamado',
+      builder: (context, state) => const NovoChamadoPage(),
+    ),
+    GoRoute(
+      path: '/novo-chamado',
+      builder: (context, state) => const NovoChamadoPage(),
     ),
   ],
 );

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../models/chamado.dart';
-import '../../viewmodels/dashboard_provider.dart';
+
+import '../../viewmodels/chamados_provider.dart';
 
 import 'package:go_router/go_router.dart';
 
@@ -13,7 +14,7 @@ class ChamadosPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(dashboardProvider);
+    final viewModel = ref.watch(chamadosProvider.notifier);
 
     final chamados = viewModel.obterPorStatus(status);
 
