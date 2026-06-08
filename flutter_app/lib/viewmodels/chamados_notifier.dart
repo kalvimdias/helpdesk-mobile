@@ -102,4 +102,22 @@ class ChamadosNotifier extends Notifier<List<Chamado>> {
 
     state = [...state, chamado];
   }
+
+  void alterarStatus(int chamadoId, StatusChamado novoStatus) {
+    state = state.map((chamado) {
+      if (chamado.id == chamadoId) {
+        return Chamado(
+          id: chamado.id,
+          titulo: chamado.titulo,
+          descricao: chamado.descricao,
+          cliente: chamado.cliente,
+          tecnicoResponsavel: chamado.tecnicoResponsavel,
+          dataAbertura: chamado.dataAbertura,
+          status: novoStatus,
+        );
+      }
+
+      return chamado;
+    }).toList();
+  }
 }

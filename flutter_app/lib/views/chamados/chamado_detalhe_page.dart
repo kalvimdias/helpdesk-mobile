@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../viewmodels/chamados_provider.dart';
+import '../../models/chamado.dart';
 
 class ChamadoDetalhePage extends ConsumerWidget {
   final int chamadoId;
@@ -52,7 +53,34 @@ class ChamadoDetalhePage extends ConsumerWidget {
 
             const SizedBox(height: 16),
 
-            Text('Status: ${chamado.status.name}'),
+            //Text('Status: ${chamado.status.name}'),
+            Row(
+              children: [
+                const Text(
+                  'Status: ',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+
+                DropdownButton<StatusChamado>(
+                  value: chamado.status,
+
+                  items: StatusChamado.values.map((status) {
+                    return DropdownMenuItem(
+                      value: status,
+                      child: Text(status.name),
+                    );
+                  }).toList(),
+
+                  onChanged: (novoStatus) {
+                    if (novoStatus == null) return;
+
+                    ref
+                        .read(chamadosProvider.notifier)
+                        .alterarStatus(chamado.id, novoStatus);
+                  },
+                ),
+              ],
+            ),
           ],
         ),
       ),
