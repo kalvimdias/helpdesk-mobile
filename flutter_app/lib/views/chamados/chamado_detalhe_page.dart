@@ -11,7 +11,9 @@ class ChamadoDetalhePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(chamadosProvider.notifier);
+    ref.watch(chamadosProvider);
+
+    final viewModel = ref.read(chamadosProvider.notifier);
 
     final chamado = viewModel.obterPorId(chamadoId);
 
@@ -37,12 +39,19 @@ class ChamadoDetalhePage extends ConsumerWidget {
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
 
+            const SizedBox(height: 8),
+
             Text('Cliente: ${chamado.cliente}'),
+
+            const SizedBox(height: 8),
 
             Text('Técnico: ${chamado.tecnicoResponsavel}'),
 
+            const SizedBox(height: 8),
+
             Text(
-              'Data: ${chamado.dataAbertura.day}/'
+              'Data: '
+              '${chamado.dataAbertura.day}/'
               '${chamado.dataAbertura.month}/'
               '${chamado.dataAbertura.year}',
             ),
@@ -53,7 +62,6 @@ class ChamadoDetalhePage extends ConsumerWidget {
 
             const SizedBox(height: 16),
 
-            //Text('Status: ${chamado.status.name}'),
             Row(
               children: [
                 const Text(
@@ -63,14 +71,12 @@ class ChamadoDetalhePage extends ConsumerWidget {
 
                 DropdownButton<StatusChamado>(
                   value: chamado.status,
-
                   items: StatusChamado.values.map((status) {
                     return DropdownMenuItem(
                       value: status,
                       child: Text(status.name),
                     );
                   }).toList(),
-
                   onChanged: (novoStatus) {
                     if (novoStatus == null) return;
 
@@ -80,6 +86,48 @@ class ChamadoDetalhePage extends ConsumerWidget {
                   },
                 ),
               ],
+            ),
+
+            const SizedBox(height: 24),
+
+            ElevatedButton.icon(
+              icon: const Icon(Icons.delete),
+              label: const Text('Excluir Chamado'),
+              onPressed: () async {
+                final confirmar = await showDialog<bool>(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const Text('Confirmar exclusão'),
+                      content: const Text(
+                        'Deseja realmente excluir este chamado?',
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context, false);
+                          },
+                          child: const Text('Cancelar'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                          child: const Text('Excluir'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+
+                if (confirmar != true) return;
+
+                ref.read(chamadosProvider.notifier).excluirChamado(chamado.id);
+
+                if (context.mounted) {
+                  Navigator.pop(context);
+                }
+              },
             ),
           ],
         ),

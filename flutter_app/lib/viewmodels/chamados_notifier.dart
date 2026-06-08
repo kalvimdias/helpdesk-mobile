@@ -120,4 +120,8 @@ class ChamadosNotifier extends Notifier<List<Chamado>> {
       return chamado;
     }).toList();
   }
+
+  void excluirChamado(int chamadoId) {
+    state = state.where((c) => c.id != chamadoId).toList();
+  }
 }
